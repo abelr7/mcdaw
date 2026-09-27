@@ -261,30 +261,35 @@ code{font-family:'JetBrains Mono',monospace;font-size:.9em}
       </a>
     </div>
 
-    <!-- Carpeta de mods -->
+    <!-- Pack de mods -->
     <div class="dl-card">
       <div class="dl-icon">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <path d="M7.5 4.21l4.5 2.6 4.5-2.6"></path>
+          <path d="M7.5 19.79V14.6L3 12"></path>
+          <path d="M21 12l-4.5 2.6v5.19"></path>
+          <path d="M3.27 6.96L12 12.01l8.73-5.05"></path>
+          <path d="M12 22.08V12"></path>
         </svg>
       </div>
-      <div class="dl-title">Carpeta de Mods</div>
-      <div class="dl-desc">Descarga la carpeta <code>mods/</code> completa con todos los mods actualizados. Descomprime y pega en tu Minecraft.</div>
-      <span class="dl-meta">📁 mods/ · <span id="mod-count-inline">0</span> mods</span>
+      <div class="dl-title">Pack de Mods</div>
+      <div class="dl-desc">Todos los mods del servidor en un ZIP. Descomprime y pega los <code>.jar</code> en tu carpeta <code>mods/</code>.</div>
+      <span class="dl-meta">🗜️ mods.zip · <span id="mod-count-inline">0</span> mods · última versión</span>
       <a class="btn btn-primary btn-lg" id="download-mods-btn" href="#" target="_blank" rel="noopener">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
           <polyline points="7 10 12 15 17 10"></polyline>
           <line x1="12" y1="15" x2="12" y2="3"></line>
         </svg>
-        Descargar carpeta mods
+        Descargar mods.zip
       </a>
     </div>
   </div>
 
   <p class="mods-note">
-    💡 <strong>Nota:</strong> el botón de la carpeta descarga siempre la última versión directamente desde el repositorio de GitHub.
-    Cada vez que añadas o quites mods en el repo, la descarga se actualizará automáticamente.
+    💡 <strong>Nota:</strong> el botón descarga siempre la <strong>última versión</strong> publicada.
+    Si cambian los mods, vuelve a descargar el pack.
   </p>
 </section>
 
@@ -292,7 +297,7 @@ code{font-family:'JetBrains Mono',monospace;font-size:.9em}
 <section class="section" id="mods">
   <div class="section-head">
     <h2>Mods incluidos</h2>
-    <p>Estos son los mods que lleva actualmente la carpeta (<span id="mod-count-2">0</span>).</p>
+    <p>Estos son los mods que lleva actualmente el pack (<span id="mod-count-2">0</span>).</p>
   </div>
 
   <div class="mods-toolbar">
@@ -320,7 +325,7 @@ code{font-family:'JetBrains Mono',monospace;font-size:.9em}
     <div class="step">
       <span class="step-num">02</span>
       <h3>Mete los mods</h3>
-      <p>Descomprime la carpeta de mods que has descargado y pega los <code>.jar</code> en <code>%appdata%/.minecraft/mods</code> (Windows) o <code>~/Library/Application Support/minecraft/mods</code> (Mac).</p>
+      <p>Descomprime <code>mods.zip</code> y pega los <code>.jar</code> en <code>%appdata%/.minecraft/mods</code> (Windows) o <code>~/Library/Application Support/minecraft/mods</code> (Mac).</p>
     </div>
     <div class="step">
       <span class="step-num">03</span>
@@ -336,20 +341,13 @@ code{font-family:'JetBrains Mono',monospace;font-size:.9em}
 
 <script>
 /* ============================================================
-   ⚙️ CONFIGURACIÓN DEL REPOSITORIO
-   ============================================================
-   Cambia estos dos valores por los de tu repo de GitHub.
-   Ejemplo: si tu repo es https://github.com/abelr7/mcdaw
-       GITHUB_USER = "abelr7"
-       GITHUB_REPO = "mcdaw"
+   ⚙️ CONFIGURACIÓN DEL REPO
    ============================================================ */
-const GITHUB_USER = "TU-USUARIO";   // 👈 CAMBIA ESTO
-const GITHUB_REPO = "mcdaw";        // 👈 CAMBIA ESTO si el repo se llama distinto
-const GITHUB_BRANCH = "main";       // "main" o "master" según tu repo
+const GITHUB_USER = "abelr7";
+const GITHUB_REPO = "mcdaw";
 
 /* ============================================================
    MODS DEL SERVIDOR (solo para mostrar en la web)
-   Actualiza esta lista cuando añadas o quites mods en la carpeta.
    ============================================================ */
 const MODS = [
   { name: "Dungeons Arise",          version: "2.1.49-beta" },
@@ -376,14 +374,12 @@ const MODS = [
 const SERVER_IP = "abelr7_.aternos.me";
 
 /* ============================================================
-   BOTÓN DE DESCARGA DE LA CARPETA MODS
-   Usa download-directory.github.io → genera un ZIP al vuelo
-   con todo el contenido de la carpeta mods/ del repo.
+   BOTÓN DE DESCARGA — apunta a la última release del repo
+   https://github.com/abelr7/mcdaw/releases/latest/download/mods.zip
    ============================================================ */
 function setupModsDownload(){
-  const repoFolderUrl = `https://github.com/${GITHUB_USER}/${GITHUB_REPO}/tree/${GITHUB_BRANCH}/mods`;
-  const downloadUrl = `https://download-directory.github.io/?url=${encodeURIComponent(repoFolderUrl)}`;
-  document.getElementById("download-mods-btn").href = downloadUrl;
+  const url = `https://github.com/${GITHUB_USER}/${GITHUB_REPO}/releases/latest/download/mods.zip`;
+  document.getElementById("download-mods-btn").href = url;
 }
 
 /* ---------- Render de la lista de mods ---------- */
