@@ -57,6 +57,7 @@ code{font-family:'JetBrains Mono',monospace;font-size:.9em}
 .btn-primary:hover{background:#fff;transform:translateY(-1px);box-shadow:0 8px 24px rgba(255,255,255,.15)}
 .btn-ghost{border-color:var(--border-strong);color:var(--text);background:transparent}
 .btn-ghost:hover{background:var(--bg-soft);border-color:var(--text-dim)}
+.btn-lg{padding:14px 26px;font-size:1rem;border-radius:12px}
 .hero{max-width:var(--max);margin:0 auto;padding:100px 24px 60px;text-align:center}
 .hero-badge{
   display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:100px;
@@ -91,73 +92,83 @@ code{font-family:'JetBrains Mono',monospace;font-size:.9em}
 .section-head p{color:var(--text-dim);max-width:520px;margin:0 auto 20px}
 .section-head code{background:var(--bg-soft);padding:2px 8px;border-radius:6px;border:1px solid var(--border);color:var(--accent-2)}
 
-/* ---------- Versión / Forge descarga ---------- */
-.version-card{
-  max-width:640px;margin:0 auto;padding:28px;
-  border-radius:var(--radius);background:var(--bg-soft);
-  border:1px solid var(--border-strong);
-  display:flex;align-items:center;gap:22px;
-  position:relative;overflow:hidden;
+/* ---------- Tarjetas de descarga ---------- */
+.downloads{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:900px;margin:0 auto}
+@media(max-width:720px){.downloads{grid-template-columns:1fr}}
+.dl-card{
+  padding:32px 28px;border-radius:var(--radius);background:var(--bg-soft);
+  border:1px solid var(--border-strong);position:relative;overflow:hidden;
   box-shadow:0 20px 60px rgba(0,0,0,.35);
+  display:flex;flex-direction:column;gap:16px;
 }
-.version-card::before{
+.dl-card::before{
   content:'';position:absolute;top:0;left:0;right:0;height:3px;
   background:linear-gradient(90deg,var(--accent),var(--accent-2));
 }
-.version-icon{
-  width:64px;height:64px;border-radius:14px;flex-shrink:0;
+.dl-icon{
+  width:56px;height:56px;border-radius:14px;
   background:linear-gradient(135deg,rgba(124,92,255,.25),rgba(74,222,128,.2));
-  border:1px solid var(--border-strong);
-  display:grid;place-items:center;
+  border:1px solid var(--border-strong);display:grid;place-items:center;
 }
-.version-info{flex:1;min-width:0;text-align:left}
-.version-title{font-size:1.15rem;font-weight:700;letter-spacing:-.01em;margin-bottom:4px}
-.version-desc{font-size:.88rem;color:var(--text-dim);line-height:1.5}
-.version-meta{
-  display:inline-flex;align-items:center;gap:6px;margin-top:10px;
+.dl-title{font-size:1.2rem;font-weight:700;letter-spacing:-.01em}
+.dl-desc{font-size:.9rem;color:var(--text-dim);line-height:1.5;flex:1}
+.dl-desc code{color:var(--accent-2)}
+.dl-meta{
+  display:inline-flex;align-items:center;gap:6px;
   font-family:'JetBrains Mono',monospace;font-size:.75rem;
   color:var(--text-dim);background:var(--bg);
-  padding:3px 10px;border-radius:100px;border:1px solid var(--border);
-  max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  padding:4px 12px;border-radius:100px;border:1px solid var(--border);
+  align-self:flex-start;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
 }
-.version-card .btn{flex-shrink:0}
-@media(max-width:560px){
-  .version-card{flex-direction:column;text-align:center;padding:24px}
-  .version-info{text-align:center}
-  .version-card .btn{width:100%;justify-content:center}
-  .version-meta{font-size:.7rem}
-}
+.dl-card .btn{justify-content:center}
 
-/* ---------- Mods ---------- */
-.mods-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
-.mod-card{
-  display:flex;align-items:center;gap:14px;padding:16px;border-radius:var(--radius);
-  background:var(--bg-soft);border:1px solid var(--border);text-decoration:none;
-  color:var(--text);transition:all .2s ease;position:relative;overflow:hidden;
+/* ---------- Lista de mods ---------- */
+.mods-toolbar{
+  display:flex;align-items:center;gap:12px;justify-content:center;
+  margin-bottom:24px;flex-wrap:wrap;
 }
-.mod-card:hover{border-color:var(--border-strong);transform:translateY(-2px);background:#161822}
+.search-box{
+  display:flex;align-items:center;gap:10px;
+  background:var(--bg-soft);border:1px solid var(--border-strong);
+  border-radius:10px;padding:10px 16px;min-width:280px;
+  transition:border-color .2s;
+}
+.search-box:focus-within{border-color:var(--accent)}
+.search-box svg{color:var(--text-dim);flex-shrink:0}
+.search-box input{
+  background:transparent;border:none;outline:none;color:var(--text);
+  font-family:inherit;font-size:.9rem;width:100%;
+}
+.search-box input::placeholder{color:var(--text-dim)}
+.mods-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.mod-card{
+  display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:var(--radius);
+  background:var(--bg-soft);border:1px solid var(--border);
+  position:relative;overflow:hidden;transition:border-color .2s,background .2s;
+}
+.mod-card:hover{border-color:var(--border-strong);background:#161822}
 .mod-card::before{
   content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
   background:linear-gradient(180deg,var(--accent),var(--accent-2));opacity:0;transition:opacity .2s;
 }
 .mod-card:hover::before{opacity:1}
 .mod-icon{
-  width:42px;height:42px;border-radius:10px;
+  width:38px;height:38px;border-radius:10px;
   background:linear-gradient(135deg,rgba(124,92,255,.2),rgba(74,222,128,.15));
   border:1px solid var(--border-strong);display:grid;place-items:center;flex-shrink:0;
-  font-weight:700;color:var(--accent);font-size:1rem;
+  font-weight:700;color:var(--accent);font-size:.95rem;
 }
 .mod-info{flex:1;min-width:0}
-.mod-name{font-weight:600;font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mod-meta{font-size:.75rem;color:var(--text-dim);margin-top:2px}
-.mod-dl{color:var(--text-dim);flex-shrink:0;transition:color .2s,transform .2s}
-.mod-card:hover .mod-dl{color:var(--accent-2);transform:translateY(2px)}
-.mods-note{
-  color:var(--text-dim);font-size:.85rem;margin:32px auto 0;padding:12px 20px;
-  background:rgba(124,92,255,.06);border:1px solid rgba(124,92,255,.15);
-  border-radius:var(--radius);max-width:640px;text-align:center;
-}
+.mod-name{font-weight:600;font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mod-meta{font-size:.72rem;color:var(--text-dim);margin-top:2px}
 .empty-mods{grid-column:1/-1;text-align:center;padding:40px;color:var(--text-dim)}
+.mods-note{
+  color:var(--text-dim);font-size:.85rem;margin:32px auto 0;padding:14px 22px;
+  background:rgba(124,92,255,.06);border:1px solid rgba(124,92,255,.15);
+  border-radius:var(--radius);max-width:680px;text-align:center;
+  line-height:1.6;
+}
+.mods-note strong{color:var(--text)}
 
 /* ---------- Steps ---------- */
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
@@ -189,11 +200,11 @@ code{font-family:'JetBrains Mono',monospace;font-size:.9em}
     <a href="#" class="logo"><span class="logo-dot"></span><span>Dawns</span></a>
     <nav class="nav-links">
       <a href="#servidor">Servidor</a>
-      <a href="#version">Versión</a>
+      <a href="#descargas">Descargas</a>
       <a href="#mods">Mods</a>
       <a href="#como-entrar">Cómo entrar</a>
     </nav>
-    <a href="#version" class="btn btn-ghost">Descargar</a>
+    <a href="#descargas" class="btn btn-ghost">Descargar</a>
   </div>
 </header>
 
@@ -220,48 +231,78 @@ code{font-family:'JetBrains Mono',monospace;font-size:.9em}
   </div>
 </section>
 
-<!-- ================= VERSIÓN ================= -->
-<section class="section" id="version">
+<!-- ================= DESCARGAS ================= -->
+<section class="section" id="descargas">
   <div class="section-head">
-    <h2>Descargar versión</h2>
-    <p>Bájate el instalador de <strong>Forge 1.16.5</strong> que usamos en el servidor.</p>
+    <h2>Descargas</h2>
+    <p>Todo lo que necesitas para entrar al servidor en dos clics.</p>
   </div>
 
-  <div class="version-card">
-    <div class="version-icon">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-        <line x1="12" y1="22.08" x2="12" y2="12"></line>
-      </svg>
+  <div class="downloads">
+    <!-- Forge -->
+    <div class="dl-card">
+      <div class="dl-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+          <line x1="12" y1="22.08" x2="12" y2="12"></line>
+        </svg>
+      </div>
+      <div class="dl-title">Forge 1.16.5 · 36.2.34</div>
+      <div class="dl-desc">Instalador necesario para cargar los mods. Ejecútalo una vez y listo.</div>
+      <span class="dl-meta">📦 forge-1.16.5-36.2.34-installer.jar</span>
+      <a class="btn btn-primary btn-lg" href="version/forge-1.16.5-36.2.34-installer.jar" download>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Descargar Forge
+      </a>
     </div>
-    <div class="version-info">
-      <div class="version-title">Forge 1.16.5 · 36.2.34</div>
-      <div class="version-desc">Instalador necesario para poder jugar con los mods del servidor.</div>
-      <span class="version-meta">📦 forge-1.16.5-36.2.34-installer.jar</span>
+
+    <!-- Carpeta de mods -->
+    <div class="dl-card">
+      <div class="dl-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+        </svg>
+      </div>
+      <div class="dl-title">Carpeta de Mods</div>
+      <div class="dl-desc">Descarga la carpeta <code>mods/</code> completa con todos los mods actualizados. Descomprime y pega en tu Minecraft.</div>
+      <span class="dl-meta">📁 mods/ · <span id="mod-count-inline">0</span> mods</span>
+      <a class="btn btn-primary btn-lg" id="download-mods-btn" href="#" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Descargar carpeta mods
+      </a>
     </div>
-    <a class="btn btn-primary" href="version/forge-1.16.5-36.2.34-installer.jar" download>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-        <polyline points="7 10 12 15 17 10"></polyline>
-        <line x1="12" y1="15" x2="12" y2="3"></line>
-      </svg>
-      Descargar
-    </a>
   </div>
+
+  <p class="mods-note">
+    💡 <strong>Nota:</strong> el botón de la carpeta descarga siempre la última versión directamente desde el repositorio de GitHub.
+    Cada vez que añadas o quites mods en el repo, la descarga se actualizará automáticamente.
+  </p>
 </section>
 
-<!-- ================= MODS ================= -->
+<!-- ================= MODS (lista informativa) ================= -->
 <section class="section" id="mods">
   <div class="section-head">
-    <h2>Mods del servidor</h2>
-    <p>Descarga todos los mods y colócalos en tu carpeta <code>mods/</code> de Minecraft.</p>
-    <div class="section-actions">
-      <a href="mods/" class="btn btn-primary" download>Descargar carpeta completa</a>
+    <h2>Mods incluidos</h2>
+    <p>Estos son los mods que lleva actualmente la carpeta (<span id="mod-count-2">0</span>).</p>
+  </div>
+
+  <div class="mods-toolbar">
+    <div class="search-box">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="mod-search" placeholder="Buscar mod..." />
     </div>
   </div>
+
   <div class="mods-grid" id="mods-grid"></div>
-  <p class="mods-note">⚠️ Los mods pueden cambiar con el tiempo. Si algo falla al entrar, revisa esta página y vuelve a descargar.</p>
 </section>
 
 <!-- ================= CÓMO ENTRAR ================= -->
@@ -274,12 +315,12 @@ code{font-family:'JetBrains Mono',monospace;font-size:.9em}
     <div class="step">
       <span class="step-num">01</span>
       <h3>Instala Forge 1.16.5</h3>
-      <p>Descarga el instalador desde la sección <a href="#version">Versión</a> y ejecútalo.</p>
+      <p>Descarga el instalador desde <a href="#descargas">Descargas</a> y ejecútalo.</p>
     </div>
     <div class="step">
       <span class="step-num">02</span>
       <h3>Mete los mods</h3>
-      <p>Pon todos los <code>.jar</code> en <code>%appdata%/.minecraft/mods</code> (Windows) o <code>~/Library/Application Support/minecraft/mods</code> (Mac).</p>
+      <p>Descomprime la carpeta de mods que has descargado y pega los <code>.jar</code> en <code>%appdata%/.minecraft/mods</code> (Windows) o <code>~/Library/Application Support/minecraft/mods</code> (Mac).</p>
     </div>
     <div class="step">
       <span class="step-num">03</span>
@@ -295,41 +336,96 @@ code{font-family:'JetBrains Mono',monospace;font-size:.9em}
 
 <script>
 /* ============================================================
-   EDITA AQUÍ TUS MODS cuando añadas/elimines alguno
+   ⚙️ CONFIGURACIÓN DEL REPOSITORIO
+   ============================================================
+   Cambia estos dos valores por los de tu repo de GitHub.
+   Ejemplo: si tu repo es https://github.com/abelr7/mcdaw
+       GITHUB_USER = "abelr7"
+       GITHUB_REPO = "mcdaw"
+   ============================================================ */
+const GITHUB_USER = "TU-USUARIO";   // 👈 CAMBIA ESTO
+const GITHUB_REPO = "mcdaw";        // 👈 CAMBIA ESTO si el repo se llama distinto
+const GITHUB_BRANCH = "main";       // "main" o "master" según tu repo
+
+/* ============================================================
+   MODS DEL SERVIDOR (solo para mostrar en la web)
+   Actualiza esta lista cuando añadas o quites mods en la carpeta.
    ============================================================ */
 const MODS = [
-  // Ejemplos (descomenta y ajusta a los tuyos):
-  // { name: "JEI",        file: "jei-1.16.5-7.7.1.152.jar",        version: "7.7.1" },
-  // { name: "JourneyMap", file: "journeymap-1.16.5-5.7.1.jar",     version: "5.7.1" },
-  // { name: "Create",     file: "create-1.16.5-0.3.2g.jar",        version: "0.3.2g" },
+  { name: "Dungeons Arise",          version: "2.1.49-beta" },
+  { name: "Dynamic Surroundings",    version: "4.0.5.0" },
+  { name: "Falling Tree",            version: "2.11.7" },
+  { name: "OptiFine",                version: "HD U G8" },
+  { name: "Trample Stopper",         version: "2.6.1" },
+  { name: "TrashSlot",               version: "12.2.1" },
+  { name: "AppleSkin",               version: "2.5.1" },
+  { name: "Carry On",                version: "1.15.6.24" },
+  { name: "Cloth Config",            version: "4.17.101" },
+  { name: "Common Networking",       version: "1.0.6" },
+  { name: "GeckoLib",                version: "3.0.106" },
+  { name: "Gravestone",              version: "1.0.7" },
+  { name: "Just Enough Items (JEI)", version: "7.8.1.1018" },
+  { name: "JourneyMap",              version: "6.0.8" },
+  { name: "Mowzie's Mobs",           version: "1.5.27" },
+  { name: "Practical Tools",         version: "1.8" },
+  { name: "Skin Changer",            version: "0.2.2" },
+  { name: "Sophisticated Backpacks", version: "3.15.20.755" },
+  { name: "Torchmaster",             version: "2.3.8" },
 ];
 
 const SERVER_IP = "abelr7_.aternos.me";
 
-function renderMods(){
-  const grid = document.getElementById("mods-grid");
-  const counter = document.getElementById("mod-count");
-  counter.textContent = MODS.length;
+/* ============================================================
+   BOTÓN DE DESCARGA DE LA CARPETA MODS
+   Usa download-directory.github.io → genera un ZIP al vuelo
+   con todo el contenido de la carpeta mods/ del repo.
+   ============================================================ */
+function setupModsDownload(){
+  const repoFolderUrl = `https://github.com/${GITHUB_USER}/${GITHUB_REPO}/tree/${GITHUB_BRANCH}/mods`;
+  const downloadUrl = `https://download-directory.github.io/?url=${encodeURIComponent(repoFolderUrl)}`;
+  document.getElementById("download-mods-btn").href = downloadUrl;
+}
 
-  if (MODS.length === 0){
-    grid.innerHTML = '<div class="empty-mods">Aún no hay mods configurados.<br>Edita el array <code>MODS</code> dentro del &lt;script&gt;.</div>';
+/* ---------- Render de la lista de mods ---------- */
+function renderMods(filter = ""){
+  const grid = document.getElementById("mods-grid");
+  const f = filter.trim().toLowerCase();
+  const list = MODS.filter(m =>
+    m.name.toLowerCase().includes(f) || m.version.toLowerCase().includes(f)
+  );
+
+  if (list.length === 0){
+    grid.innerHTML = '<div class="empty-mods">No se encontraron mods con ese nombre.</div>';
     return;
   }
 
-  grid.innerHTML = MODS.map(mod => {
+  grid.innerHTML = list.map(mod => {
     const initial = mod.name.charAt(0).toUpperCase();
-    const version = mod.version || "1.16.5";
-    return `<a class="mod-card" href="mods/${encodeURIComponent(mod.file)}" download>
+    return `<div class="mod-card">
       <div class="mod-icon">${initial}</div>
       <div class="mod-info">
         <div class="mod-name">${mod.name}</div>
-        <div class="mod-meta">v${version} · .jar</div>
+        <div class="mod-meta">v${mod.version} · .jar</div>
       </div>
-      <svg class="mod-dl" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-    </a>`;
+    </div>`;
   }).join("");
 }
 
+/* ---------- Contadores ---------- */
+function updateCounters(){
+  const total = MODS.length;
+  document.getElementById("mod-count").textContent = total;
+  document.getElementById("mod-count-inline").textContent = total;
+  document.getElementById("mod-count-2").textContent = total;
+}
+
+/* ---------- Buscador ---------- */
+function setupSearch(){
+  const input = document.getElementById("mod-search");
+  input.addEventListener("input", e => renderMods(e.target.value));
+}
+
+/* ---------- Copiar IP ---------- */
 function setupCopy(){
   const btn = document.getElementById("copy-ip");
   const text = document.getElementById("copy-text");
@@ -349,8 +445,11 @@ function setupCopy(){
 }
 
 document.getElementById("year").textContent = new Date().getFullYear();
+updateCounters();
 renderMods();
+setupSearch();
 setupCopy();
+setupModsDownload();
 </script>
 </body>
 </html>
